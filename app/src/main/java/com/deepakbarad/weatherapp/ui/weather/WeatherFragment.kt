@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
@@ -68,6 +69,10 @@ class WeatherFragment : BaseFragment() {
         weatherViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
             Timber.i("CurrentWeather ->", currentWeather)
             displayWeatherInfo(currentWeather)
+        }
+
+        weatherViewModel.errorInfo.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
 

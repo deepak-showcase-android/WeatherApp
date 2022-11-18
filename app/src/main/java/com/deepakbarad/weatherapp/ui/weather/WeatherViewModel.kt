@@ -24,6 +24,7 @@ class WeatherViewModel @Inject constructor(
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.d(throwable)
         loadingFlag.set(false)
+        mErrorInfo.postValue(context.getString(R.string.no_weather_info))
     }
 
     private val mCurrentWeather: MutableLiveData<CurrentWeather> = MutableLiveData()
