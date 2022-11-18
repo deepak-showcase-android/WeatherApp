@@ -66,7 +66,7 @@ class WeatherFragment : Fragment() {
         with(currentWeather) {
             binding.tvCity.text = this.city?.name
             this.list?.forEach { listItem ->
-                weatherData.appendLine(listItem.weather?.get(0)?.main + " On " + listItem.dtTxt)
+                weatherData.appendLine("${listItem.weather?.get(0)?.main}(${listItem.weather?.get(0)?.description}) On ${listItem.dtTxt}")
             }
             binding.tvWeather.text = weatherData.toString()
         }
