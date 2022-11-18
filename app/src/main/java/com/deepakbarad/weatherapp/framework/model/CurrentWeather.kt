@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.model
+package com.deepakbarad.weatherapp.framework.model
 
 import com.google.gson.annotations.SerializedName
 

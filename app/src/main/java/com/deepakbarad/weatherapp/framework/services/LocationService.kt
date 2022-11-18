@@ -1,9 +1,8 @@
-package com.deepakbarad.weatherapp.services
+package com.deepakbarad.weatherapp.framework.services
 
 import android.content.Context
 import android.location.Location
 import android.location.LocationManager
-import android.util.Log
 import timber.log.Timber
 import javax.inject.Inject
 

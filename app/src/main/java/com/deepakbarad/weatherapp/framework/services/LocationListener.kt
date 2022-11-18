@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.services
+package com.deepakbarad.weatherapp.framework.services
 
 import android.location.Location
 import android.location.LocationListener

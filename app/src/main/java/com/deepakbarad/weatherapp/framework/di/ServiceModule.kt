@@ -1,8 +1,8 @@
-package com.deepakbarad.weatherapp.di
+package com.deepakbarad.weatherapp.framework.di
 
 import android.content.Context
-import com.deepakbarad.weatherapp.services.LocationListener
-import com.deepakbarad.weatherapp.services.LocationService
+import com.deepakbarad.weatherapp.framework.services.LocationListener
+import com.deepakbarad.weatherapp.framework.services.LocationService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

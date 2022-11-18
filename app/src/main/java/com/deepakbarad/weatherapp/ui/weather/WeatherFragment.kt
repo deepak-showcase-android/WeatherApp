@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
-import com.deepakbarad.weatherapp.model.CurrentWeather
-import com.deepakbarad.weatherapp.services.LocationService
+import com.deepakbarad.weatherapp.framework.base.BaseFragment
+import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.framework.services.LocationService
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class WeatherFragment : Fragment() {
+class WeatherFragment : BaseFragment() {
 
     private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
@@ -54,7 +54,7 @@ class WeatherFragment : Fragment() {
         _binding = null
     }
 
-    private fun setObservers() {
+    override fun setObservers() {
         weatherViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
             Timber.i("CurrentWeather ->", currentWeather)
             displayWeatherInfo(currentWeather)
@@ -71,6 +71,4 @@ class WeatherFragment : Fragment() {
             binding.tvWeather.text = weatherData.toString()
         }
     }
-
-
 }

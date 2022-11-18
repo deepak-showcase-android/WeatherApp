@@ -1,10 +1,9 @@
-package com.deepakbarad.weatherapp.data
+package com.deepakbarad.weatherapp.framework.data
 
-import com.deepakbarad.weatherapp.BuildConfig
-import com.deepakbarad.weatherapp.data.interfaces.IOpenWeatherDataSource
-import com.deepakbarad.weatherapp.di.NetworkModule
-import com.deepakbarad.weatherapp.model.CurrentWeather
-import com.deepakbarad.weatherapp.network.IOpenWeatherApi
+import com.deepakbarad.weatherapp.framework.data.interfaces.IOpenWeatherDataSource
+import com.deepakbarad.weatherapp.framework.di.NetworkModule
+import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.framework.network.IOpenWeatherApi
 import javax.inject.Inject
 
 class OpenWeatherRemoteDataSource @Inject constructor(

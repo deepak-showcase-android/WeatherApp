@@ -1,18 +1,14 @@
 package com.deepakbarad.weatherapp.ui.weather
 
 import android.app.Application
-import android.content.Context
-import androidx.databinding.ObservableField
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.deepakbarad.weatherapp.R
-import com.deepakbarad.weatherapp.data.repository.OpenWeatherRepository
-import com.deepakbarad.weatherapp.model.CurrentWeather
+import com.deepakbarad.weatherapp.framework.base.BaseViewModel
+import com.deepakbarad.weatherapp.framework.data.repository.OpenWeatherRepository
+import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,10 +19,7 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private val context: Application,
     private val openWeatherRepository: OpenWeatherRepository
-) : ViewModel() {
-
-    val loadingFlag = ObservableField<Boolean>()
-    val loadingMessage = ObservableField<String>()
+) : BaseViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.d(throwable)
