@@ -13,6 +13,7 @@
 1. Create mock flavor, add mock classes (MockOpenWeatherRemoteDataSource.kt)
 2. Add mock data in the mock file to simulate weather data
 3. Write Unit and UI tests
+4. For any hardcoded values, consider creating CONST or move to resource file 
 
 ## Features (if time permits)
 1. Display google map, User to see weather info of any tapped place. 
