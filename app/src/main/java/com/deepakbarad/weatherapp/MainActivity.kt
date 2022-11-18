@@ -1,15 +1,23 @@
 package com.deepakbarad.weatherapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.deepakbarad.weatherapp.databinding.ActivityMainBinding
 import com.deepakbarad.weatherapp.framework.services.LocationService
+import com.deepakbarad.weatherapp.framework.utils.showSnackbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        checkIfPermissionsRequire()
     }
 
     override fun onResume() {
@@ -48,5 +57,48 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         locationService.stopTracking()
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Timber.tag("Permission: ").i("Granted")
+            } else {
+                Timber.tag("Permission: ").i("Denied")
+            }
+        }
+
+    private fun checkIfPermissionsRequire() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                //permission granted
+            }
+
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) -> {
+                binding.root.showSnackbar(
+                    binding.root,
+                    getString(R.string.location_permission_required),
+                    Snackbar.LENGTH_INDEFINITE,
+                    getString(R.string.ok)
+                ) {
+                    requestPermissionLauncher.launch(
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+                }
+            }
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            }
+        }
     }
 }

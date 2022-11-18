@@ -9,4 +9,6 @@
     <string name="city_content">City or Place</string>
     <string name="location_coordinates_content">Location coordinates</string>
     <string name="weather_data_content">Weather data</string>
+    <string name="location_permission_required">Location permission required to get weather info.</string>
+    <string name="ok">Ok</string>
 </resources>
