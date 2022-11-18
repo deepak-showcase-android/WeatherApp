@@ -2,7 +2,7 @@
 
 ## How to see weather info
 1. Connect device to the internet
-2. Tap on Weather tab
+2. Start WeatherApp, tap on the Weather tab
 
 ## How to build and run the app
 1. Clone the code
