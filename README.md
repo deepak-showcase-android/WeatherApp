@@ -3,7 +3,8 @@
 ## How to build and run the app
 1. Clone the code
    (git clone git@github.com:deepak-showcase-android/WeatherApp.git)
-2. Build and run either on emulator or on real device 
+2. Build and run either on emulator or on real device
+3. Give Location access permission to the app manually  
 
 ## How to see weather info
 1. Connect device to the internet
@@ -18,4 +19,5 @@
 ## Features (if time permits)
 1. Display google map, User to see weather info of any tapped place. 
 2. Group weather data based on date. Show the groupwise weather data in RecyclerView with expand/collpase feature to see additional weather info available.
+3. Request Location access permission
 
