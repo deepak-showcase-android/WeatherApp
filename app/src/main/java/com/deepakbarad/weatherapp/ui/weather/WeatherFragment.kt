@@ -8,12 +8,10 @@ import androidx.fragment.app.viewModels
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
-import com.deepakbarad.weatherapp.framework.services.LocationService
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class WeatherFragment : BaseFragment() {
@@ -21,9 +19,6 @@ class WeatherFragment : BaseFragment() {
     private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
     private val weatherViewModel: WeatherViewModel by viewModels()
-
-    @Inject
-    lateinit var locationService: LocationService
 
     override fun onCreateView(
         inflater: LayoutInflater,
