@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import com.deepakbarad.weatherapp.framework.services.LocationService
+import com.deepakbarad.weatherapp.framework.utils.showSnackbar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -72,7 +73,7 @@ class WeatherFragment : BaseFragment() {
         }
 
         weatherViewModel.errorInfo.observe(viewLifecycleOwner) { errorMessage ->
-            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            binding.root.showSnackbar(binding.root, errorMessage, Snackbar.LENGTH_SHORT, null) {}
         }
     }
 
