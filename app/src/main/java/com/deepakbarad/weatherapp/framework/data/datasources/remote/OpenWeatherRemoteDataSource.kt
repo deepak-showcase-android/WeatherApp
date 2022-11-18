@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.framework.data
+package com.deepakbarad.weatherapp.framework.data.datasources.remote
 
 import com.deepakbarad.weatherapp.framework.data.interfaces.IOpenWeatherDataSource
 import com.deepakbarad.weatherapp.framework.di.NetworkModule
