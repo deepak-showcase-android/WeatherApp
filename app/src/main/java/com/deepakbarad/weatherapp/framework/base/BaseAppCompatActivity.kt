@@ -1,14 +1,12 @@
 package com.deepakbarad.weatherapp.framework.base
 
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.deepakbarad.weatherapp.framework.services.LocationService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-open class BaseFragment : Fragment() {
-    open fun setObservers() {}
-    open fun setListeners() {}
+open class BaseAppCompatActivity : AppCompatActivity() {
 
     @Inject
     lateinit var locationService: LocationService
