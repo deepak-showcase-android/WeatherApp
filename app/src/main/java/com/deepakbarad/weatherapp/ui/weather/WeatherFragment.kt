@@ -35,6 +35,7 @@ class WeatherFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setListeners()
         setObservers()
         getForecast()
     }
@@ -54,7 +55,16 @@ class WeatherFragment : BaseFragment() {
         _binding = null
     }
 
+    override fun setListeners() {
+        super.setListeners()
+        binding.fabRefresh.setOnClickListener {
+            binding.tvWeather.text = ""
+            getForecast()
+        }
+    }
+
     override fun setObservers() {
+        super.setObservers()
         weatherViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
             Timber.i("CurrentWeather ->", currentWeather)
             displayWeatherInfo(currentWeather)

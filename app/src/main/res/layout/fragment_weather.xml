@@ -10,63 +10,81 @@
             type="com.deepakbarad.weatherapp.ui.weather.WeatherViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/layoutProgress"
-            layout="@layout/layout_progress"
-            android:layout_width="match_parent"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabRefresh"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:loadingFlag="@{viewModel.loadingFlag}"
-            app:loadingMessage="@{viewModel.loadingMessage}" />
-
-        <TextView
-            android:id="@+id/tvCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen16dp"
-            android:textSize="@dimen/dimen20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="City" />
-
-        <TextView
-            android:id="@+id/tvCoordinates"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen16dp"
+            android:layout_gravity="end|bottom"
             android:layout_marginEnd="@dimen/dimen16dp"
-            android:textSize="@dimen/dimen14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCity"
-            tools:text="12.7000 79.0005" />
-
-        <ScrollView
-            android:id="@+id/svWeatherData"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen0dp"
-            android:layout_marginStart="@dimen/dimen16dp"
-            android:layout_marginEnd="@dimen/dimen16dp"
-            android:layout_marginTop="@dimen/dimen16dp"
             android:layout_marginBottom="@dimen/dimen64dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCoordinates">
+            android:contentDescription="@string/refresh"
+            android:src="@drawable/ic_baseline_refresh_24" />
 
-            <TextView
-                android:id="@+id/tvWeather"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/layoutProgress"
+                layout="@layout/layout_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen16sp"
-                tools:text="Cloudy" />
-        </ScrollView>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadingFlag="@{viewModel.loadingFlag}"
+                app:loadingMessage="@{viewModel.loadingMessage}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen16dp"
+                android:contentDescription="@string/city_content"
+                android:textSize="@dimen/dimen20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="City" />
+
+            <TextView
+                android:id="@+id/tvCoordinates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen16dp"
+                android:layout_marginEnd="@dimen/dimen16dp"
+                android:contentDescription="@string/location_coordinates_content"
+                android:textSize="@dimen/dimen14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCity"
+                tools:text="12.7000 79.0005" />
+
+            <ScrollView
+                android:id="@+id/svWeatherData"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen0dp"
+                android:layout_marginStart="@dimen/dimen16dp"
+                android:layout_marginTop="@dimen/dimen16dp"
+                android:layout_marginEnd="@dimen/dimen16dp"
+                android:layout_marginBottom="@dimen/dimen64dp"
+                android:contentDescription="@string/weather_data_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCoordinates">
+
+                <TextView
+                    android:id="@+id/tvWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/weather_data_content"
+                    android:textSize="@dimen/dimen16sp"
+                    tools:text="Cloudy" />
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>
