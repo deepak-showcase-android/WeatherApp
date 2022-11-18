@@ -1,5 +1,7 @@
 package com.deepakbarad.weatherapp.model
 
+import com.google.gson.annotations.SerializedName
+
 class City {
     var id: Int? = null
     var name: String? = null
@@ -29,6 +31,7 @@ class ListData {
     var visibility: Int? = null
     var pop: Double? = null
     var sys: Sys? = null
+    @SerializedName("dt_txt")
     var dtTxt: String? = null
     var rain: Rain? = null
 }

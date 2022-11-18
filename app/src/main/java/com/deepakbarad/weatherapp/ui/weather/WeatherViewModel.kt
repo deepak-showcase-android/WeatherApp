@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.ui.home
+package com.deepakbarad.weatherapp.ui.weather
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
@@ -15,7 +15,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val openWeatherRepository: OpenWeatherRepository) :
+class WeatherViewModel @Inject constructor(private val openWeatherRepository: OpenWeatherRepository) :
     ViewModel() {
 
     val loadingFlag = ObservableField<Boolean>()
