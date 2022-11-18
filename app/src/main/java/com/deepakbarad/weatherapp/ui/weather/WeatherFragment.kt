@@ -69,6 +69,13 @@ class WeatherFragment : BaseFragment() {
                 weatherData.appendLine("${listItem.weather?.get(0)?.main}(${listItem.weather?.get(0)?.description}) On ${listItem.dtTxt}")
             }
             binding.tvWeather.text = weatherData.toString()
+            locationService.locationListener.currentLocation?.let { location ->
+                binding.tvCoordinates.text = buildString {
+                    append(location.longitude)
+                    append(" ")
+                    append(location.latitude)
+                }
+            }
         }
     }
 }

@@ -35,6 +35,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="City" />
 
+        <TextView
+            android:id="@+id/tvCoordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen16dp"
+            android:layout_marginEnd="@dimen/dimen16dp"
+            android:textSize="@dimen/dimen14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCity"
+            tools:text="12.7000 79.0005" />
+
         <ScrollView
             android:id="@+id/svWeatherData"
             android:layout_width="match_parent"
@@ -46,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCity">
+            app:layout_constraintTop_toBottomOf="@id/tvCoordinates">
 
             <TextView
                 android:id="@+id/tvWeather"
