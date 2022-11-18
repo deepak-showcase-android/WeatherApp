@@ -17,4 +17,5 @@
 
 ## Features (if time permits)
 1. Display google map, User to see weather info of any tapped place. 
+2. Group weather data based on date. Show the groupwise weather data in RecyclerView with expand/collpase feature to see additional weather info available.
 
