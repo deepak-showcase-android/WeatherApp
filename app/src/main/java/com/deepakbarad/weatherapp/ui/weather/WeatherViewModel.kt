@@ -25,6 +25,9 @@ class WeatherViewModel @Inject constructor(
         Timber.d(throwable)
         loadingFlag.set(false)
         mErrorInfo.postValue(context.getString(R.string.no_weather_info))
+
+        //SSL pinning used...if SHA256 entered in network_security_config.xml is wrong...exception will be thrown.
+        //https://sreekumar-av.medium.com/certificate-public-key-pinning-in-android-using-retrofit-2-0-74140800025b
     }
 
     private val mCurrentWeather: MutableLiveData<CurrentWeather> = MutableLiveData()
