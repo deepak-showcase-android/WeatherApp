@@ -3,7 +3,7 @@
     <domain-config>
         <domain includeSubdomains="true">openweathermap.org</domain>
         <pin-set>
-            <pin digest="SHA-256">bxmGTWYycVN5oCjh3GJrxWVndLSZjypDO6evrHMwbXg=</pin>
+            <pin digest="SHA-256">axmGTWYycVN5oCjh3GJrxWVndLSZjypDO6evrHMwbXg=</pin>
             <pin digest="SHA-256">DDBL5bejH7czkXcAeJ0vCiRxwMnVBsDlBMBsFtfLF8A=</pin>
         </pin-set>
     </domain-config>
