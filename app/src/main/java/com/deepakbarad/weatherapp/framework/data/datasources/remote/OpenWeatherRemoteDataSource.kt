@@ -28,6 +28,5 @@ class OpenWeatherRemoteDataSource @Inject constructor(
             }
             Timber.d("exception!!")
             throw(Exception("No current weather info available"))
-            //return flowOf(currentWeather.body() ?: throw Exception("No current weather info available"))
     }
 }
