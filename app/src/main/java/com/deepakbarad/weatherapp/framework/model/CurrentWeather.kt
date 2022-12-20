@@ -69,6 +69,7 @@ class CurrentWeather {
     var cnt: Int? = null
     var list: List<ListData>? = null
     var city: City? = null
+    var collectedTime: Long? = null
 }
 
 class Wind {

@@ -1,21 +1,15 @@
 package com.deepakbarad.weatherapp.ui.weather
 
 import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.deepakbarad.weatherapp.R
 import com.deepakbarad.weatherapp.framework.base.BaseViewModel
 import com.deepakbarad.weatherapp.framework.data.repository.OpenWeatherRepository
+import com.deepakbarad.weatherapp.framework.model.City
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -34,33 +28,32 @@ class WeatherViewModel @Inject constructor(
         //https://sreekumar-av.medium.com/certificate-public-key-pinning-in-android-using-retrofit-2-0-74140800025b
     }
 
-    private val mCurrentWeather: MutableLiveData<CurrentWeather> = MutableLiveData()
-    val currentWeather: LiveData<CurrentWeather> get() = mCurrentWeather
-
-    fun getForecast5(longitude: Double, latitude: Double) {
-        loadingMessage.set(context.getString(R.string.fetching_weather_forecast))
-        loadingFlag.set(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            openWeatherRepository.getForecast5(longitude, latitude)
-                .onCompletion { cause: Throwable? ->
-                    when (cause) {
-                        null -> {
-                            Timber.d("Flow completed successfully")
-                        }
-                        is Exception -> {
-                            Timber.d("cause is Exception")
-                        }
-                        else -> {
-                            Timber.d(cause)
-                        }
+    suspend fun getForecast5Flow(longitude: Double, latitude: Double): Flow<CurrentWeather> {
+        return openWeatherRepository.getForecast5(longitude, latitude)
+            .onStart {
+                loadingFlag.set(true)
+            }.onCompletion { cause: Throwable? ->
+                when (cause) {
+                    null -> {
+                        Timber.d("Flow completed successfully")
                     }
-                    loadingFlag.set(false)
-                }.onEach {
-                    mCurrentWeather.postValue(it)
-                }.catch { throwable ->
-                    Timber.d(throwable)
-                    mErrorInfo.postValue(context.getString(R.string.no_weather_info))
-                }.launchIn(this)
-        }
+                    is Exception -> {
+                        Timber.d("cause is Exception" + cause)
+                    }
+                    else -> {
+                        Timber.d(cause)
+                    }
+                }
+                loadingFlag.set(false)
+            }.catch { throwable ->
+                Timber.d(throwable)
+                mErrorInfo.postValue(context.getString(R.string.no_weather_info))
+            }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CurrentWeather().apply {
+                this.collectedTime = 0L
+                this.city = City().apply {
+                    this.name = "Initial City"
+                }
+            })
     }
 }

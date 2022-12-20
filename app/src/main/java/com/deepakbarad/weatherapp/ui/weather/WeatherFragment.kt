@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -34,15 +39,22 @@ class WeatherFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
         setObservers()
-        getForecast()
+        getForecastWithFlow()
     }
 
-    private fun getForecast() {
+    private fun getForecastWithFlow() {
         locationService.locationListener.currentLocation?.longitude?.let { longitude ->
             locationService.locationListener.currentLocation?.latitude?.let { latitude ->
-                weatherViewModel.getForecast5(
-                    longitude, latitude
-                )
+                lifecycleScope.launch {
+                    viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        weatherViewModel.getForecast5Flow(longitude, latitude)
+                            .collect { currentWeather ->
+                                delay(1000L)
+                                Timber.i("Collected CurrentWeather ->", currentWeather)
+                                displayWeatherInfo(currentWeather)
+                            }
+                    }
+                }
             }
         }
     }
@@ -56,17 +68,12 @@ class WeatherFragment : BaseFragment() {
         super.setListeners()
         binding.fabRefresh.setOnClickListener {
             binding.tvWeather.text = ""
-            getForecast()
+            getForecastWithFlow()
         }
     }
 
     override fun setObservers() {
         super.setObservers()
-        weatherViewModel.currentWeather.observe(viewLifecycleOwner) { currentWeather ->
-            Timber.i("CurrentWeather ->", currentWeather)
-            displayWeatherInfo(currentWeather)
-        }
-
         weatherViewModel.errorInfo.observe(viewLifecycleOwner) { errorMessage ->
             binding.root.showSnackbar(binding.root, errorMessage, Snackbar.LENGTH_SHORT, null) {}
         }
@@ -75,6 +82,7 @@ class WeatherFragment : BaseFragment() {
     private fun displayWeatherInfo(currentWeather: CurrentWeather) {
         val weatherData = StringBuilder()
         with(currentWeather) {
+            binding.tvCollectionTime.text = this.collectedTime?.toString()
             binding.tvCity.text = this.city?.name
             this.list?.forEach { listItem ->
                 weatherData.appendLine("${listItem.weather?.get(0)?.main}(${listItem.weather?.get(0)?.description}) On ${listItem.dtTxt}")
@@ -87,6 +95,7 @@ class WeatherFragment : BaseFragment() {
                     append(location.latitude)
                 }
             }
+            weatherViewModel.loadingFlag.set(false)
         }
     }
 }
