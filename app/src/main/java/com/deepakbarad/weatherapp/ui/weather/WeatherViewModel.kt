@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.deepakbarad.weatherapp.R
 import com.deepakbarad.weatherapp.framework.base.BaseViewModel
 import com.deepakbarad.weatherapp.framework.data.repository.OpenWeatherRepository
+import com.deepakbarad.weatherapp.framework.idlingresource.IdlingResourceCounter
 import com.deepakbarad.weatherapp.framework.model.City
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,10 +33,12 @@ class WeatherViewModel @Inject constructor(
         return openWeatherRepository.getForecast5(longitude, latitude)
             .onStart {
                 loadingFlag.set(true)
+                IdlingResourceCounter.countingIdlingResource.increment()
             }.onCompletion { cause: Throwable? ->
                 when (cause) {
                     null -> {
                         Timber.d("Flow completed successfully")
+                        IdlingResourceCounter.countingIdlingResource.decrement()
                     }
                     is Exception -> {
                         Timber.d("cause is Exception" + cause)

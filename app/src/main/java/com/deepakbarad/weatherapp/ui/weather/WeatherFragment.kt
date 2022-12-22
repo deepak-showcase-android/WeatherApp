@@ -37,6 +37,7 @@ class WeatherFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("WeatherFragment created")
         setListeners()
         setObservers()
         getForecastWithFlow()
