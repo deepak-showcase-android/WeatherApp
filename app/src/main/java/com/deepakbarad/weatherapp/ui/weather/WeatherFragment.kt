@@ -15,7 +15,6 @@ import com.deepakbarad.weatherapp.framework.services.LocationListenerService
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -51,7 +50,6 @@ class WeatherFragment : BaseFragment() {
                     viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                         weatherViewModel.getForecast5Flow(longitude, latitude)
                             .collect { currentWeather ->
-                                delay(1000L)
                                 Timber.i("Collected CurrentWeather ->", currentWeather)
                                 displayWeatherInfo(currentWeather)
                             }
