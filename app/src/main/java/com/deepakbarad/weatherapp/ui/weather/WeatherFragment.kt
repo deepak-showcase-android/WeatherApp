@@ -11,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.framework.services.LocationListenerService
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,8 +44,9 @@ class WeatherFragment : BaseFragment() {
     }
 
     private fun getForecastWithFlow() {
-        locationService.locationListener.currentLocation?.longitude?.let { longitude ->
-            locationService.locationListener.currentLocation?.latitude?.let { latitude ->
+        val locationListenerService = locationService.locationListener as LocationListenerService
+        locationListenerService.currentLocation?.longitude?.let { longitude ->
+            locationListenerService.currentLocation?.latitude?.let { latitude ->
                 lifecycleScope.launch {
                     viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                         weatherViewModel.getForecast5Flow(longitude, latitude)
@@ -88,7 +90,7 @@ class WeatherFragment : BaseFragment() {
                 weatherData.appendLine("${listItem.weather?.get(0)?.main}(${listItem.weather?.get(0)?.description}) On ${listItem.dtTxt}")
             }
             binding.tvWeather.text = weatherData.toString()
-            locationService.locationListener.currentLocation?.let { location ->
+            (locationService.locationListener as LocationListenerService).currentLocation?.let { location ->
                 binding.tvCoordinates.text = buildString {
                     append(location.longitude)
                     append(" ")

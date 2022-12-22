@@ -3,8 +3,9 @@ package com.deepakbarad.weatherapp.framework.services
 import android.location.Location
 import android.location.LocationListener
 import android.os.Bundle
+import javax.inject.Inject
 
-class LocationListener : LocationListener {
+class LocationListenerService @Inject constructor() : LocationListener {
 
     private var currLoc: Location? = null;
     val currentLocation: Location? get() = currLoc
