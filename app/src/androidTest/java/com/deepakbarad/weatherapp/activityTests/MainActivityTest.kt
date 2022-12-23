@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp
+package com.deepakbarad.weatherapp.activityTests
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
@@ -6,6 +6,8 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+import com.deepakbarad.weatherapp.MainActivity
+import com.deepakbarad.weatherapp.R
 import com.deepakbarad.weatherapp.framework.di.ContextModule
 import com.deepakbarad.weatherapp.framework.di.DataSourceModule
 import com.deepakbarad.weatherapp.framework.di.NetworkModule
