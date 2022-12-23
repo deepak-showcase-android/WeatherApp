@@ -2,6 +2,7 @@ package com.deepakbarad.weatherapp.utils
 
 import androidx.test.InstrumentationRegistry
 import dagger.hilt.android.testing.HiltTestApplication
+//import dagger.hilt.android.testing.HiltTestApplication
 import java.io.IOException
 import java.io.InputStreamReader
 

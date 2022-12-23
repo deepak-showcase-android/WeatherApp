@@ -14,6 +14,10 @@ import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countin
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+//import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countingIdlingResource
+//import dagger.hilt.android.testing.HiltAndroidRule
+//import dagger.hilt.android.testing.HiltAndroidTest
+//import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -43,15 +47,19 @@ class MainActivityTest {
 
     @Before
     fun setUp() {
+        try {
+            mockServer = MockWebServer()
+            mockServer.start(8080)
+        } catch (exception: Exception) {
+            println(exception)
+        }
+
         val activityScenario: ActivityScenario<*> = ActivityScenario.launch(
             MainActivity::class.java
         )
         activityScenario.onActivity {
             idlingResourceRegistry.register(countingIdlingResource)
         }
-
-        mockServer = MockWebServer()
-        mockServer.start(8080)
     }
 
     @After
@@ -74,7 +82,6 @@ class MainActivityTest {
                 return mockResponse
             }
         }
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         onView(withId(R.id.navigation_weather)).perform(click())
         onView(allOf(withId(R.id.tvCity), isCompletelyDisplayed()))
         onView(allOf(withId(R.id.tvCity))).check(matches(withText("Test Location")))

@@ -1,15 +1,12 @@
 package com.deepakbarad.weatherapp.utils
 
-import android.view.View
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.testing.FragmentScenario
-import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.IdlingResource
-import java.util.*
+//import androidx.fragment.app.testing.FragmentScenario
 
+class DataBindingIdlingResource {
+
+}
+
+/*
 class DataBindingIdlingResource : IdlingResource {
     // List of registered callbacks
     private val idlingCallbacks = mutableListOf<IdlingResource.ResourceCallback>()
@@ -89,3 +86,4 @@ fun <T : Fragment> DataBindingIdlingResource.monitorFragment(fragmentScenario: F
         this.activity = it.requireActivity()
     }
 }
+*/
