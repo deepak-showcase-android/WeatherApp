@@ -10,7 +10,7 @@ import com.deepakbarad.weatherapp.framework.di.ContextModule
 import com.deepakbarad.weatherapp.framework.di.DataSourceModule
 import com.deepakbarad.weatherapp.framework.di.NetworkModule
 import com.deepakbarad.weatherapp.framework.di.ServiceModule
-import com.deepakbarad.weatherapp.framework.idlingresource.IdlingResourceCounter.countingIdlingResource
+import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countingIdlingResource
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -74,6 +74,7 @@ class MainActivityTest {
                 return mockResponse
             }
         }
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
         onView(withId(R.id.navigation_weather)).perform(click())
         onView(allOf(withId(R.id.tvCity), isCompletelyDisplayed()))
         onView(allOf(withId(R.id.tvCity))).check(matches(withText("Test Location")))
