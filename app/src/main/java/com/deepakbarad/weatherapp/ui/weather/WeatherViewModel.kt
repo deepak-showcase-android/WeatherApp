@@ -38,7 +38,6 @@ class WeatherViewModel @Inject constructor(
                 when (cause) {
                     null -> {
                         Timber.d("Flow completed successfully")
-                        EspressoIdlingResource.decrement()
                     }
                     is Exception -> {
                         Timber.d("cause is Exception" + cause)

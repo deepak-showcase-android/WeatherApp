@@ -12,6 +12,7 @@ import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
 import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import com.deepakbarad.weatherapp.framework.services.LocationListenerService
+import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -97,6 +98,7 @@ class WeatherFragment : BaseFragment() {
                 }
             }
             weatherViewModel.loadingFlag.set(false)
+            EspressoIdlingResource.decrement()
         }
     }
 }

@@ -11,13 +11,11 @@ import com.deepakbarad.weatherapp.framework.di.DataSourceModule
 import com.deepakbarad.weatherapp.framework.di.NetworkModule
 import com.deepakbarad.weatherapp.framework.di.ServiceModule
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countingIdlingResource
+import com.deepakbarad.weatherapp.utils.DataBindingIdlingResource
+import com.deepakbarad.weatherapp.utils.monitorActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-//import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countingIdlingResource
-//import dagger.hilt.android.testing.HiltAndroidRule
-//import dagger.hilt.android.testing.HiltAndroidTest
-//import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -28,7 +26,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-
 
 @UninstallModules(
     ContextModule::class,
@@ -44,6 +41,7 @@ class MainActivityTest {
 
     private lateinit var mockServer: MockWebServer
     private val idlingResourceRegistry = IdlingRegistry.getInstance()
+    private val dataBindingIdlingResource = DataBindingIdlingResource()
 
     @Before
     fun setUp() {
@@ -53,13 +51,17 @@ class MainActivityTest {
         } catch (exception: Exception) {
             println(exception)
         }
-
+        idlingResourceRegistry.register(countingIdlingResource)
+        idlingResourceRegistry.register(dataBindingIdlingResource)
+        /*
         val activityScenario: ActivityScenario<*> = ActivityScenario.launch(
             MainActivity::class.java
         )
         activityScenario.onActivity {
             idlingResourceRegistry.register(countingIdlingResource)
+            idlingResourceRegistry.register(dataBindingIdlingResource)
         }
+        */
     }
 
     @After
@@ -82,8 +84,11 @@ class MainActivityTest {
                 return mockResponse
             }
         }
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
         onView(withId(R.id.navigation_weather)).perform(click())
         onView(allOf(withId(R.id.tvCity), isCompletelyDisplayed()))
         onView(allOf(withId(R.id.tvCity))).check(matches(withText("Test Location")))
+        activityScenario.close()
     }
 }
