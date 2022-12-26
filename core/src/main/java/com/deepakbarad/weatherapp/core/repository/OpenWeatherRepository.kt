@@ -1,8 +1,7 @@
-package com.deepakbarad.weatherapp.framework.data.repository
+package com.deepakbarad.weatherapp.core.repository
 
-import com.deepakbarad.weatherapp.framework.data.interfaces.IOpenWeatherDataSource
-import com.deepakbarad.weatherapp.framework.di.OpenWeatherRemoteDataSourceQualifier
-import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.core.data.CurrentWeather
+import com.deepakbarad.weatherapp.core.di.OpenWeatherRemoteDataSourceQualifier
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

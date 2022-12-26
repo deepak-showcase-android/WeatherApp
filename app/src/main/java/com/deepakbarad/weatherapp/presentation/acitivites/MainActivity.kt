@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp
+package com.deepakbarad.weatherapp.presentation.acitivites
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.deepakbarad.weatherapp.R
 import com.deepakbarad.weatherapp.databinding.ActivityMainBinding
 import com.deepakbarad.weatherapp.framework.base.BaseAppCompatActivity
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar

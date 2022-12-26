@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.ui.dashboard
+package com.deepakbarad.weatherapp.presentation.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

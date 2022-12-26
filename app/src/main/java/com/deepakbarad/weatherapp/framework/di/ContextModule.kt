@@ -15,5 +15,4 @@ object ContextModule {
     fun provideContext(@ApplicationContext context: Context): Context {
         return context
     }
-
 }

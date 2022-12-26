@@ -6,13 +6,13 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import com.deepakbarad.weatherapp.MainActivity
 import com.deepakbarad.weatherapp.R
 import com.deepakbarad.weatherapp.framework.di.ContextModule
 import com.deepakbarad.weatherapp.framework.di.DataSourceModule
 import com.deepakbarad.weatherapp.framework.di.NetworkModule
 import com.deepakbarad.weatherapp.framework.di.ServiceModule
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countingIdlingResource
+import com.deepakbarad.weatherapp.presentation.acitivites.MainActivity
 import com.deepakbarad.weatherapp.utils.DataBindingIdlingResource
 import com.deepakbarad.weatherapp.utils.monitorActivity
 import dagger.hilt.android.testing.HiltAndroidRule

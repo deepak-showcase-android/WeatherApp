@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.ui.notifications
+package com.deepakbarad.weatherapp.presentation.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.ui.notifications
+package com.deepakbarad.weatherapp.presentation.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

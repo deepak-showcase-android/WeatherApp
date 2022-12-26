@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.ui.weather
+package com.deepakbarad.weatherapp.presentation.weather
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.deepakbarad.weatherapp.core.data.CurrentWeather
 import com.deepakbarad.weatherapp.databinding.FragmentWeatherBinding
 import com.deepakbarad.weatherapp.framework.base.BaseFragment
-import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import com.deepakbarad.weatherapp.framework.services.LocationListenerService
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar

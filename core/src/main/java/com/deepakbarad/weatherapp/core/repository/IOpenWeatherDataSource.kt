@@ -1,6 +1,6 @@
-package com.deepakbarad.weatherapp.framework.data.interfaces
+package com.deepakbarad.weatherapp.core.repository
 
-import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.core.data.CurrentWeather
 import kotlinx.coroutines.flow.Flow
 
 interface IOpenWeatherDataSource {

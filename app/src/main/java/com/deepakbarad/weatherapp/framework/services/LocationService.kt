@@ -4,7 +4,7 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import com.deepakbarad.weatherapp.framework.di.ServiceModule
+import com.deepakbarad.weatherapp.core.di.LocationListenerQualifier
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ interface ILocationService {
 
 class LocationService @Inject constructor(
     private val context: Context,
-    @ServiceModule.LocationListenerQualifier val locationListener: LocationListener
+    @LocationListenerQualifier val locationListener: LocationListener
 ) : ILocationService {
     private var TAG: String = "LocationService"
     private var REFRESH_TIME: Long = 400

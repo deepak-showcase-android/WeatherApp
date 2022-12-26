@@ -1,6 +1,6 @@
 package com.deepakbarad.weatherapp.network
 
-import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.core.data.CurrentWeather
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.QueryMap

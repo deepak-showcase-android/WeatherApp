@@ -1,9 +1,9 @@
 package com.deepakbarad.weatherapp.framework.data.datasources.remote
 
 import com.deepakbarad.weatherapp.BuildConfig.OPEN_WEATHER_API_KEY
-import com.deepakbarad.weatherapp.framework.data.interfaces.IOpenWeatherDataSource
-import com.deepakbarad.weatherapp.framework.di.NetworkModule
-import com.deepakbarad.weatherapp.framework.model.CurrentWeather
+import com.deepakbarad.weatherapp.core.data.CurrentWeather
+import com.deepakbarad.weatherapp.core.di.OpenWeatherApiQualifier
+import com.deepakbarad.weatherapp.core.repository.IOpenWeatherDataSource
 import com.deepakbarad.weatherapp.framework.network.IOpenWeatherApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,7 +11,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class OpenWeatherRemoteDataSource @Inject constructor(
-    @NetworkModule.OpenWeatherApiQualifier private val openWeatherApi: IOpenWeatherApi
+    @OpenWeatherApiQualifier private val openWeatherApi: IOpenWeatherApi
 ) : IOpenWeatherDataSource {
 
     override suspend fun getForecast5(longitude: Double, latitude: Double): Flow<CurrentWeather> =

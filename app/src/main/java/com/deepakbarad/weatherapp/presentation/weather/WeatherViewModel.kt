@@ -1,12 +1,12 @@
-package com.deepakbarad.weatherapp.ui.weather
+package com.deepakbarad.weatherapp.presentation.weather
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.deepakbarad.weatherapp.R
+import com.deepakbarad.weatherapp.core.data.City
+import com.deepakbarad.weatherapp.core.data.CurrentWeather
+import com.deepakbarad.weatherapp.core.repository.OpenWeatherRepository
 import com.deepakbarad.weatherapp.framework.base.BaseViewModel
-import com.deepakbarad.weatherapp.framework.data.repository.OpenWeatherRepository
-import com.deepakbarad.weatherapp.framework.model.City
-import com.deepakbarad.weatherapp.framework.model.CurrentWeather
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
