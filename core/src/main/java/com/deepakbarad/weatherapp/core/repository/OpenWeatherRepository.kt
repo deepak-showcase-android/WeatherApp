@@ -11,4 +11,12 @@ class OpenWeatherRepository @Inject constructor(@OpenWeatherRemoteDataSourceQual
     override suspend fun getForecast5(longitude: Double, latitude: Double): Flow<CurrentWeather> {
         return openWeatherRemoteDataSource.getForecast5(longitude, latitude)
     }
+
+    override suspend fun getCachedForecast(): CurrentWeather? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun saveForecast(currentWeather: CurrentWeather) {
+        TODO("Not yet implemented")
+    }
 }

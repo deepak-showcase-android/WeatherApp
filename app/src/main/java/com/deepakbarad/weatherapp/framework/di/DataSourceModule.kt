@@ -3,7 +3,7 @@ package com.deepakbarad.weatherapp.framework.di
 import android.content.Context
 import com.deepakbarad.weatherapp.core.di.OpenWeatherRemoteDataSourceQualifier
 import com.deepakbarad.weatherapp.core.repository.IOpenWeatherDataSource
-import com.deepakbarad.weatherapp.framework.data.datasources.remote.OpenWeatherRemoteDataSource
+import com.deepakbarad.weatherapp.framework.datasources.remote.OpenWeatherRemoteDataSource
 import com.deepakbarad.weatherapp.framework.network.IOpenWeatherApi
 import com.deepakbarad.weatherapp.framework.network.RetrofitHelper
 import dagger.Binds

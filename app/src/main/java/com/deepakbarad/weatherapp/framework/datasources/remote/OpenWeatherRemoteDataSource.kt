@@ -1,4 +1,4 @@
-package com.deepakbarad.weatherapp.framework.data.datasources.remote
+package com.deepakbarad.weatherapp.framework.datasources.remote
 
 import com.deepakbarad.weatherapp.BuildConfig.OPEN_WEATHER_API_KEY
 import com.deepakbarad.weatherapp.core.data.CurrentWeather
@@ -35,4 +35,12 @@ class OpenWeatherRemoteDataSource @Inject constructor(
                 println(exception)
             }
         }
+
+    override suspend fun getCachedForecast(): CurrentWeather? {
+        throw IllegalArgumentException("not to be implemented here")
+    }
+
+    override suspend fun saveForecast(currentWeather: CurrentWeather) {
+        throw IllegalArgumentException("not to be implemented here")
+    }
 }
