@@ -7,7 +7,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.deepakbarad.weatherapp.R
-import com.deepakbarad.weatherapp.framework.di.ContextModule
+import com.deepakbarad.weatherapp.framework.di.ApplicationModule
 import com.deepakbarad.weatherapp.framework.di.DataSourceModule
 import com.deepakbarad.weatherapp.framework.di.NetworkModule
 import com.deepakbarad.weatherapp.framework.di.ServiceModule
@@ -30,7 +30,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @UninstallModules(
-    ContextModule::class,
+    ApplicationModule::class,
     DataSourceModule::class,
     NetworkModule::class,
     ServiceModule::class

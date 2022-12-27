@@ -6,8 +6,9 @@ import com.deepakbarad.weatherapp.core.repository.IOpenWeatherDataSource
 import com.deepakbarad.weatherapp.framework.db.DatabaseService
 import com.deepakbarad.weatherapp.framework.db.WeatherEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class RoomWeatherDataSource(context: Context) : IOpenWeatherDataSource {
+class OpenWeatherLocalDataSource(context: Context) : IOpenWeatherDataSource {
 
     val weatherDao = DatabaseService.getInstance(context).weatherDao()
 
@@ -16,8 +17,14 @@ class RoomWeatherDataSource(context: Context) : IOpenWeatherDataSource {
     }
 
     override suspend fun saveForecast(currentWeather: CurrentWeather) {
-        weatherDao.addWeatherEntity(WeatherEntity.fromCurrentWeather(currentWeather))
+        val weatherEntity = WeatherEntity.fromCurrentWeather(currentWeather)
+        println("Update -> saveForecast has id ${weatherEntity.id}")
+        weatherDao.addWeatherEntity(weatherEntity)
     }
 
     override suspend fun getCachedForecast() = weatherDao.getWeatherEntity()?.toCurrentWeather()
+
+    override suspend fun getCachedForecastFlow(): Flow<CurrentWeather?> {
+        return weatherDao.getCachedForecastFlow().map { it?.toCurrentWeather() }
+    }
 }

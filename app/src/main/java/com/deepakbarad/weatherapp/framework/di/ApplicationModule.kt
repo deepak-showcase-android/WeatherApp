@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ContextModule {
+object ApplicationModule {
 
     @Provides
     fun provideContext(@ApplicationContext context: Context): Context {

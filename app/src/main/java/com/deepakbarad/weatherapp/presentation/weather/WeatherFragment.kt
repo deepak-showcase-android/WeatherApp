@@ -14,6 +14,7 @@ import com.deepakbarad.weatherapp.framework.base.BaseFragment
 import com.deepakbarad.weatherapp.framework.services.LocationListenerService
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource
 import com.deepakbarad.weatherapp.framework.utils.showSnackbar
+import com.deepakbarad.weatherapp.framework.viewmodels.WeatherViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -41,6 +42,7 @@ class WeatherFragment : BaseFragment() {
         println("WeatherFragment created")
         setListeners()
         setObservers()
+        weatherViewModel.getCachedCurrentWeather()
         getForecastWithFlow()
     }
 
@@ -53,7 +55,9 @@ class WeatherFragment : BaseFragment() {
                         weatherViewModel.getForecast5Flow(longitude, latitude)
                             .collect { currentWeather ->
                                 Timber.i("Collected CurrentWeather ->", currentWeather)
+                                println("Update -> collected current weather")
                                 displayWeatherInfo(currentWeather)
+                                weatherViewModel.saveCurrentWeather(currentWeather)
                             }
                     }
                 }

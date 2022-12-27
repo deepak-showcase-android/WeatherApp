@@ -43,4 +43,8 @@ class OpenWeatherRemoteDataSource @Inject constructor(
     override suspend fun saveForecast(currentWeather: CurrentWeather) {
         throw IllegalArgumentException("not to be implemented here")
     }
+
+    override suspend fun getCachedForecastFlow(): Flow<CurrentWeather?> {
+        throw IllegalArgumentException("not to be implemented here")
+    }
 }

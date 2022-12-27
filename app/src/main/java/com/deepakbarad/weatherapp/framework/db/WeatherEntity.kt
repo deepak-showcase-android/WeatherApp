@@ -10,7 +10,7 @@ data class WeatherEntity(
     val weatherData: String,
     val createdTime: Long,
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0
+    var id: Int = 0
 ) {
 
     fun toCurrentWeather(): CurrentWeather {
@@ -25,7 +25,9 @@ data class WeatherEntity(
             return WeatherEntity(
                 Gson().toJson(currentWeather),
                 System.currentTimeMillis()
-            )
+            ).also {
+                it.id = currentWeather.id
+            }
         }
     }
 }

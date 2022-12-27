@@ -6,6 +6,9 @@ import javax.inject.Qualifier
 annotation class OpenWeatherRemoteDataSourceQualifier
 
 @Qualifier
+annotation class OpenWeatherLocalDataSourceQualifier
+
+@Qualifier
 annotation class OpenWeatherApiQualifier
 
 @Qualifier
