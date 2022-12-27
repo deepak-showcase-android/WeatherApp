@@ -6,6 +6,7 @@
     <string name="fetching_weather_forecast">Fetching weather forecast...</string>
     <string name="refresh">Refresh</string>
     <string name="no_weather_info">Unable to get weather info</string>
+    <string name="unable_to_get_result_within_time">Unable to get weather info within stipulated time.</string>
     <string name="city_content">City or Place</string>
     <string name="location_coordinates_content">Location coordinates</string>
     <string name="weather_data_content">Weather data</string>

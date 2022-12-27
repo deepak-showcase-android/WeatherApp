@@ -9,11 +9,8 @@ import com.deepakbarad.weatherapp.framework.UseCases
 import com.deepakbarad.weatherapp.framework.base.BaseViewModel
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -54,17 +51,18 @@ class WeatherViewModel @Inject constructor(
                     null -> {
                         Timber.d("Flow completed successfully")
                     }
+                    is TimeoutCancellationException -> {
+                        mErrorInfo.postValue(context.getString(R.string.unable_to_get_result_within_time))
+                    }
                     is Exception -> {
                         Timber.d("cause is Exception" + cause)
+                        mErrorInfo.postValue(context.getString(R.string.no_weather_info))
                     }
                     else -> {
                         Timber.d(cause)
                     }
                 }
                 loadingFlag.set(false)
-            }.catch { throwable ->
-                Timber.d(throwable)
-                mErrorInfo.postValue(context.getString(R.string.no_weather_info))
             }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CurrentWeather().apply {
                 this.collectedTime = 0L
