@@ -1,8 +1,11 @@
 package com.deepakbarad.weatherapp.framework.di
 
 import android.content.Context
-import com.deepakbarad.weatherapp.framework.data.datasources.remote.OpenWeatherRemoteDataSource
-import com.deepakbarad.weatherapp.framework.data.interfaces.IOpenWeatherDataSource
+import com.deepakbarad.weatherapp.core.di.OpenWeatherLocalDataSourceQualifier
+import com.deepakbarad.weatherapp.core.di.OpenWeatherRemoteDataSourceQualifier
+import com.deepakbarad.weatherapp.core.repository.IOpenWeatherDataSource
+import com.deepakbarad.weatherapp.framework.datasources.local.OpenWeatherLocalDataSource
+import com.deepakbarad.weatherapp.framework.datasources.remote.OpenWeatherRemoteDataSource
 import com.deepakbarad.weatherapp.framework.network.IOpenWeatherApi
 import com.deepakbarad.weatherapp.framework.network.RetrofitHelper
 import dagger.Binds
@@ -11,7 +14,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -24,6 +26,11 @@ object DataSourceModule {
         OpenWeatherRemoteDataSource(
             RetrofitHelper.getInstance().create(IOpenWeatherApi::class.java)
         )
+
+    @Singleton
+    @Provides
+    fun provideOpenWeatherLocalDataSource(@ApplicationContext appContext: Context): OpenWeatherLocalDataSource =
+        OpenWeatherLocalDataSource(appContext)
 }
 
 @Module
@@ -35,5 +42,11 @@ abstract class OrderRemoteDataSourceModule {
     abstract fun bindOpenWeatherRemoteDataSource(impl: OpenWeatherRemoteDataSource): IOpenWeatherDataSource
 }
 
-@Qualifier
-annotation class OpenWeatherRemoteDataSourceQualifier
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class OrderLocalDataSourceModule {
+    @OpenWeatherLocalDataSourceQualifier
+    @Singleton
+    @Binds
+    abstract fun bindOpenWeatherLocalDataSource(impl: OpenWeatherLocalDataSource): IOpenWeatherDataSource
+}

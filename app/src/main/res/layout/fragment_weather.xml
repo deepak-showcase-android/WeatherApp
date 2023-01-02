@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.deepakbarad.weatherapp.ui.weather.WeatherViewModel" />
+            type="com.deepakbarad.weatherapp.framework.viewmodels.WeatherViewModel" />
     </data>
 
     <FrameLayout
@@ -72,7 +72,7 @@
                 android:layout_marginEnd="@dimen/dimen16dp"
                 android:layout_marginBottom="@dimen/dimen64dp"
                 android:contentDescription="@string/weather_data_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvCollectionTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCoordinates">
@@ -85,6 +85,22 @@
                     android:textSize="@dimen/dimen16sp"
                     tools:text="Cloudy" />
             </ScrollView>
+
+            <TextView
+                android:id="@+id/tvCollectionTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen16dp"
+                android:layout_marginEnd="@dimen/dimen16dp"
+                android:layout_marginBottom="@dimen/dimen64dp"
+                android:contentDescription="@string/collection_time_content"
+                android:textSize="@dimen/dimen16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/svWeatherData"
+                tools:text="Collection Time: 1500000" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

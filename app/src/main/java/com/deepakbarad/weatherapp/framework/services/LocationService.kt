@@ -2,14 +2,22 @@ package com.deepakbarad.weatherapp.framework.services
 
 import android.content.Context
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
+import com.deepakbarad.weatherapp.core.di.LocationListenerQualifier
 import timber.log.Timber
 import javax.inject.Inject
 
+interface ILocationService {
+    fun getLocation(provider: String): Location?
+    fun startTracking()
+    fun stopTracking()
+}
+
 class LocationService @Inject constructor(
     private val context: Context,
-    val locationListener: LocationListener
-) {
+    @LocationListenerQualifier val locationListener: LocationListener
+) : ILocationService {
     private var TAG: String = "LocationService"
     private var REFRESH_TIME: Long = 400
     private var REFRESH_DISTANCE: Float = 1.00f
@@ -21,7 +29,7 @@ class LocationService @Inject constructor(
         return locManager
     }
 
-    fun getLocation(provider: String): Location? {
+    override fun getLocation(provider: String): Location? {
         try {
             return getLocationManager().getLastKnownLocation(provider)
         } catch (exception: SecurityException) {
@@ -30,7 +38,7 @@ class LocationService @Inject constructor(
         return null
     }
 
-    fun startTracking() {
+    override fun startTracking() {
         try {
             getLocationManager().requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
@@ -50,7 +58,7 @@ class LocationService @Inject constructor(
         }
     }
 
-    fun stopTracking() {
+    override fun stopTracking() {
         getLocationManager().removeUpdates(locationListener)
     }
 }
