@@ -93,12 +93,15 @@ class WeatherViewModel @Inject constructor(
                 }
                 loadingFlag.set(false)
             }
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), CurrentWeather().apply {
-                this.collectedTime = 0L
-                this.city = City().apply {
-                    this.name = "Initial City"
-                }
-            })
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(10000L),
+                CurrentWeather().apply {
+                    this.collectedTime = 0L
+                    this.city = City().apply {
+                        this.name = "Initial City"
+                    }
+                })
 
 
     fun saveCurrentWeather(currentWeather: CurrentWeather) {

@@ -43,7 +43,7 @@ class WeatherFragment : BaseFragment() {
         setListeners()
         setObservers()
         weatherViewModel.getCachedCurrentWeather()
-        getForecastWithFlow()
+        binding.fabRefresh.performClick()
     }
 
     private fun getForecastWithFlow() {
@@ -55,7 +55,7 @@ class WeatherFragment : BaseFragment() {
                         weatherViewModel.getForecast5Flow(longitude, latitude)
                             .collect { currentWeather ->
                                 Timber.i("Collected CurrentWeather ->", currentWeather)
-                                println("Update -> collected current weather")
+                                println("Update -> collected current weather ${currentWeather.city?.name}")
                                 displayWeatherInfo(currentWeather)
                                 weatherViewModel.saveCurrentWeather(currentWeather)
                             }
