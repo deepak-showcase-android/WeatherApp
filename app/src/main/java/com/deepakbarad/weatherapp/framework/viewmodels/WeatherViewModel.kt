@@ -12,7 +12,10 @@ import com.deepakbarad.weatherapp.framework.services.WeatherCheckWorker
 import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -66,12 +69,13 @@ class WeatherViewModel @Inject constructor(
         //https://sreekumar-av.medium.com/certificate-public-key-pinning-in-android-using-retrofit-2-0-74140800025b
     }
 
-    suspend fun getForecast5Flow(longitude: Double, latitude: Double): Flow<CurrentWeather> {
-        return useCases.getWeather(longitude, latitude)
+    suspend fun getForecast5Flow(longitude: Double, latitude: Double) =
+        useCases.getWeather(longitude, latitude)
             .onStart {
                 EspressoIdlingResource.increment()
                 loadingFlag.set(true)
-            }.onCompletion { cause: Throwable? ->
+            }
+            .onCompletion { cause: Throwable? ->
                 when (cause) {
                     null -> {
                         Timber.d("Flow completed successfully")
@@ -95,7 +99,7 @@ class WeatherViewModel @Inject constructor(
                     this.name = "Initial City"
                 }
             })
-    }
+
 
     fun saveCurrentWeather(currentWeather: CurrentWeather) {
         cachedCurrentWeather?.let {

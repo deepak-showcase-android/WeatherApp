@@ -17,3 +17,7 @@ class WeatherCheckWorker @AssistedInject constructor(
         return Result.success()
     }
 }
+
+fun main() {
+    println("hi")
+}
