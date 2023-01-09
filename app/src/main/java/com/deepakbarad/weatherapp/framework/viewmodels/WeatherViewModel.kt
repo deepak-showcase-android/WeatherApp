@@ -95,7 +95,7 @@ class WeatherViewModel @Inject constructor(
             }
             .stateIn(
                 viewModelScope,
-                SharingStarted.WhileSubscribed(10000L),
+                SharingStarted.WhileSubscribed(5000L),
                 CurrentWeather().apply {
                     this.collectedTime = 0L
                     this.city = City().apply {
