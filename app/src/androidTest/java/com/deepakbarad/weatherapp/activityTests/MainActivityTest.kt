@@ -7,11 +7,11 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.deepakbarad.weatherapp.R
-import com.deepakbarad.weatherapp.framework.di.ApplicationModule
-import com.deepakbarad.weatherapp.framework.di.DataSourceModule
-import com.deepakbarad.weatherapp.framework.di.NetworkModule
-import com.deepakbarad.weatherapp.framework.di.ServiceModule
-import com.deepakbarad.weatherapp.framework.utils.EspressoIdlingResource.countingIdlingResource
+import com.deepakbarad.weatherapp.core.di.ApplicationModule
+import com.deepakbarad.weatherapp.data.di.DataSourceModule
+import com.deepakbarad.weatherapp.core.network.di.NetworkModule
+import com.deepakbarad.weatherapp.core.services.di.ServiceModule
+import com.deepakbarad.weatherapp.core.utils.EspressoIdlingResource.countingIdlingResource
 import com.deepakbarad.weatherapp.presentation.acitivites.MainActivity
 import com.deepakbarad.weatherapp.utils.DataBindingIdlingResource
 import com.deepakbarad.weatherapp.utils.monitorActivity

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.deepakbarad.weatherapp.framework.viewmodels.WeatherViewModel" />
+            type="com.deepakbarad.weatherapp.presentation.weather.WeatherViewModel" />
     </data>
 
     <FrameLayout

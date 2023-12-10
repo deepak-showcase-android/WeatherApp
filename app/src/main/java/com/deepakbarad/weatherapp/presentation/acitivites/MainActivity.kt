@@ -12,8 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.deepakbarad.weatherapp.R
 import com.deepakbarad.weatherapp.databinding.ActivityMainBinding
-import com.deepakbarad.weatherapp.framework.base.BaseAppCompatActivity
-import com.deepakbarad.weatherapp.framework.utils.showSnackbar
+import com.deepakbarad.weatherapp.presentation.base.BaseAppCompatActivity
+import com.deepakbarad.weatherapp.core.utils.showSnackbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
